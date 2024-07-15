@@ -6,14 +6,14 @@
 const int HEADER_LENGTH = 32;
 
 
-typedef struct ChartinyHeader
+typedef struct WaxHeader
 {
 	int version;
 	int format;
 	int row_length;
 	int column_count;
 	int row_count;
-} ChartinyHeader;
+} WaxHeader;
 
 
 int read_n_bytes_into_int (unsigned char const *buffer, int n)
@@ -27,7 +27,7 @@ int read_n_bytes_into_int (unsigned char const *buffer, int n)
 }
 
 
-void read_header_row (unsigned char const *buffer, ChartinyHeader *header)
+void read_header_row (unsigned char const *buffer, WaxHeader *header)
 {
 	header->version = read_n_bytes_into_int(&buffer[0], 2);
 	header->format = read_n_bytes_into_int(&buffer[2], 2);
@@ -37,7 +37,7 @@ void read_header_row (unsigned char const *buffer, ChartinyHeader *header)
 }
 
 
-void print_header_row (ChartinyHeader *header)
+void print_header_row (WaxHeader *header)
 {
 	printf("\tVersion: %d\n", header->version);
 	printf("\t Format: %d\n", header->format);
@@ -70,7 +70,7 @@ int main (int argc, char const *argv[])
 
 	unsigned char header_buffer[HEADER_LENGTH];
 	fread(header_buffer, HEADER_LENGTH, 1, ptr);
-	ChartinyHeader header;
+	WaxHeader header;
 	read_header_row(header_buffer, &header);
 	print_header_row(&header);
 
