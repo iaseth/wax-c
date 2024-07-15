@@ -6,7 +6,17 @@
 const int HEADER_LENGTH = 32;
 
 
-int read_n_byte_int (char const *buffer, int n)
+typedef struct ChartinyHeader
+{
+	int version;
+	int format;
+	int row_length;
+	int column_count;
+	int row_count;
+} ChartinyHeader;
+
+
+int read_n_bytes_into_int (unsigned char const *buffer, int n)
 {
 	int num = 0;
 	for (int i = 0; i < n; ++i) {
@@ -16,6 +26,25 @@ int read_n_byte_int (char const *buffer, int n)
 	return num;
 }
 
+
+void read_header_row (unsigned char const *buffer, ChartinyHeader *header)
+{
+	header->version = read_n_bytes_into_int(&buffer[0], 2);
+	header->format = read_n_bytes_into_int(&buffer[2], 2);
+	header->row_length = read_n_bytes_into_int(&buffer[4], 2);
+	header->column_count = read_n_bytes_into_int(&buffer[6], 2);
+	header->row_count = read_n_bytes_into_int(&buffer[8], 4);
+}
+
+
+void print_header_row (ChartinyHeader *header)
+{
+	printf("\tVersion: %d\n", header->version);
+	printf("\t Format: %d\n", header->format);
+	printf("\t Length: %d\n", header->row_length);
+	printf("\tColumns: %d\n", header->column_count);
+	printf("\t   Rows: %d\n", header->row_count);
+}
 
 
 int main (int argc, char const *argv[])
@@ -39,6 +68,12 @@ int main (int argc, char const *argv[])
 		return 0;
 	}
 
+	unsigned char header_buffer[HEADER_LENGTH];
+	fread(header_buffer, HEADER_LENGTH, 1, ptr);
+	ChartinyHeader header;
+	read_header_row(header_buffer, &header);
+	print_header_row(&header);
+
 	unsigned char *buffer = NULL;
 	int buffer_size = 24;
 	buffer = malloc(buffer_size);
@@ -47,12 +82,12 @@ int main (int argc, char const *argv[])
 		printf("Row %3d: [ ", i+1);
 
 		fread(buffer, buffer_size, 1, ptr);
-		int t = read_n_byte_int(&buffer[0], 4);
-		int o = read_n_byte_int(&buffer[4], 4);
-		int h = read_n_byte_int(&buffer[8], 4);
-		int l = read_n_byte_int(&buffer[12], 4);
-		int c = read_n_byte_int(&buffer[16], 4);
-		int v = read_n_byte_int(&buffer[20], 4);
+		int t = read_n_bytes_into_int(&buffer[0], 4);
+		int o = read_n_bytes_into_int(&buffer[4], 4);
+		int h = read_n_bytes_into_int(&buffer[8], 4);
+		int l = read_n_bytes_into_int(&buffer[12], 4);
+		int c = read_n_bytes_into_int(&buffer[16], 4);
+		int v = read_n_bytes_into_int(&buffer[20], 4);
 		printf("%d, %d, %d, %d, %d, %d", t, o, h, l, c, v);
 
 		printf("]\n");
