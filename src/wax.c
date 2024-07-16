@@ -3,8 +3,9 @@
 
 
 
-const int HEADER_LENGTH = 32;
+const int WAX_FILE_HEADER_LENGTH = 16;
 
+typedef unsigned char Byte;
 
 typedef struct WaxHeader
 {
@@ -16,7 +17,7 @@ typedef struct WaxHeader
 } WaxHeader;
 
 
-int read_n_bytes_into_int (unsigned char const *buffer, int n)
+int read_n_bytes_into_int (Byte const *buffer, int n)
 {
 	int num = 0;
 	for (int i = 0; i < n; ++i) {
@@ -27,7 +28,7 @@ int read_n_bytes_into_int (unsigned char const *buffer, int n)
 }
 
 
-void read_header_row (unsigned char const *buffer, WaxHeader *header)
+void read_header_row (Byte const *buffer, WaxHeader *header)
 {
 	header->version = read_n_bytes_into_int(&buffer[0], 2);
 	header->format = read_n_bytes_into_int(&buffer[2], 2);
@@ -68,13 +69,13 @@ int main (int argc, char const *argv[])
 		return 0;
 	}
 
-	unsigned char header_buffer[HEADER_LENGTH];
-	fread(header_buffer, HEADER_LENGTH, 1, ptr);
+	Byte header_buffer[WAX_FILE_HEADER_LENGTH];
+	fread(header_buffer, WAX_FILE_HEADER_LENGTH, 1, ptr);
 	WaxHeader header;
 	read_header_row(header_buffer, &header);
 	print_header_row(&header);
 
-	unsigned char *buffer = NULL;
+	Byte *buffer = NULL;
 	int buffer_size = 24;
 	buffer = malloc(buffer_size);
 
