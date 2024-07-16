@@ -9,11 +9,13 @@ typedef unsigned char Byte;
 
 typedef struct WaxHeader
 {
-	int version;
-	int format;
-	int row_length;
-	int column_count;
-	int row_count;
+	int version; // 2 bytes
+	int format; // 2 bytes
+	int header_lines_count; // 1 byte
+	int column_count; // 1 byte
+	int row_length; // 2 bytes
+	int row_count; // 4 bytes
+	int default_value; // 4 bytes
 } WaxHeader;
 
 
@@ -32,19 +34,23 @@ void read_header_row (Byte const *buffer, WaxHeader *header)
 {
 	header->version = read_n_bytes_into_int(&buffer[0], 2);
 	header->format = read_n_bytes_into_int(&buffer[2], 2);
-	header->row_length = read_n_bytes_into_int(&buffer[4], 2);
-	header->column_count = read_n_bytes_into_int(&buffer[6], 2);
+	header->header_lines_count = read_n_bytes_into_int(&buffer[4], 1);
+	header->column_count = read_n_bytes_into_int(&buffer[5], 1);
+	header->row_length = read_n_bytes_into_int(&buffer[6], 2);
 	header->row_count = read_n_bytes_into_int(&buffer[8], 4);
+	header->default_value = read_n_bytes_into_int(&buffer[12], 4);
 }
 
 
 void print_header_row (WaxHeader *header)
 {
-	printf("\tVersion: %d\n", header->version);
-	printf("\t Format: %d\n", header->format);
-	printf("\t Length: %d\n", header->row_length);
-	printf("\tColumns: %d\n", header->column_count);
-	printf("\t   Rows: %d\n", header->row_count);
+	printf("\tWax Version: %d\n", header->version);
+	printf("\tWax Format: %d\n", header->format);
+	printf("\tHeader Lines: %d\n", header->header_lines_count);
+	printf("\tColumn Count: %d\n", header->column_count);
+	printf("\tRow Length: %d\n", header->row_length);
+	printf("\tRow Count: %d\n", header->row_count);
+	printf("\tDefault Value: %d\n", header->default_value);
 }
 
 
@@ -79,7 +85,7 @@ int main (int argc, char const *argv[])
 	int buffer_size = 24;
 	buffer = malloc(buffer_size);
 
-	for (int i = 0; i < 10; ++i) {
+	for (int i = 0; i < header.row_count; ++i) {
 		printf("Row %3d: [ ", i+1);
 
 		fread(buffer, buffer_size, 1, ptr);
