@@ -1,7 +1,7 @@
 #ifndef WAX_HEADER_H
 #define WAX_HEADER_H
 
-#include "wax.h"
+#include "wax_common.h"
 
 
 
