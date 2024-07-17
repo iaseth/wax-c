@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 #include "wax_header.h"
-#include "wax_index_candle.h"
+#include "wax_stock_candle.h"
 
 
 
@@ -74,14 +74,15 @@ int main (int argc, char const *argv[])
 
 	for (int i = 0; i < header.row_count; ++i) {
 		fread(buffer, buffer_size, 1, ptr);
-		IndexCandle candle;
+		StockCandle candle;
 		candle.timestamp = read_n_bytes_into_u32(&buffer[0], 4);
 		candle.open = read_n_bytes_into_u32(&buffer[4], 4);
 		candle.high = read_n_bytes_into_u32(&buffer[8], 4);
 		candle.low = read_n_bytes_into_u32(&buffer[12], 4);
 		candle.close = read_n_bytes_into_u32(&buffer[16], 4);
+		candle.volume = read_n_bytes_into_u32(&buffer[20], 4);
 		printf("Row %3d: [ %d, %d, %d, %d, %d, %d ]\n", i+1, candle.timestamp,
-			candle.open, candle.high, candle.low, candle.close, 0);
+			candle.open, candle.high, candle.low, candle.close, candle.volume);
 	}
 
 	fclose(ptr);
