@@ -1,6 +1,8 @@
 
 default: waxc
 
+redo: clean default
+
 wax.o: src/wax.c
 	gcc -c src/wax.c -Iinclude
 
