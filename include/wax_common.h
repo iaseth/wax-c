@@ -1,6 +1,7 @@
 #ifndef WAX_COMMON_H
 #define WAX_COMMON_H
 
+#include <stdio.h>
 #include <stdint.h>
 
 

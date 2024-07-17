@@ -47,8 +47,7 @@ int main (int argc, char const *argv[])
 		candle.low = read_n_bytes_into_u32(&buffer[12], 4);
 		candle.close = read_n_bytes_into_u32(&buffer[16], 4);
 		candle.volume = read_n_bytes_into_u32(&buffer[20], 4);
-		printf("Row %3d: [ %d, %d, %d, %d, %d, %d ]\n", i+1, candle.timestamp,
-			candle.open, candle.high, candle.low, candle.close, candle.volume);
+		print_stock_candle(&candle, i+1);
 	}
 
 	fclose(ptr);

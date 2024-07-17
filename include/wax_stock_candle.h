@@ -9,6 +9,7 @@ typedef struct StockCandle {
 	u32 timestamp, open, high, low, close, volume;
 } StockCandle;
 
+int print_stock_candle(StockCandle *candle, int n);
 
 
 #endif
