@@ -2,7 +2,7 @@
 default: waxc
 
 wax.o: src/wax.c
-	gcc -c src/wax.c
+	gcc -c src/wax.c -Iinclude
 
 waxc: wax.o
 	gcc -o waxc wax.o
