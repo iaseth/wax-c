@@ -21,16 +21,6 @@ typedef struct WaxHeader
 	u32 default_value; // 4 bytes
 } WaxHeader;
 
-typedef struct IndexCandle {
-	u32 timestamp, open, high, low, close;
-} IndexCandle;
 
-typedef struct StockCandle {
-	u32 timestamp, open, high, low, close, volume;
-} StockCandle;
-
-typedef struct OptionCandle {
-	u32 timestamp, open, high, low, close, volume, oi;
-} OptionCandle;
 
 #endif
