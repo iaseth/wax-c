@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "wax_header.h"
 #include "wax_index_candle.h"
 
 
