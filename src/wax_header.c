@@ -6,7 +6,7 @@
 
 
 
-int read_header_row (Byte const *buffer, WaxHeader *header)
+int read_header_row_from_bytes (WaxHeader *header, Byte const *buffer)
 {
 	header->version = read_n_bytes_into_u32(&buffer[0], 2);
 	header->format = read_n_bytes_into_u32(&buffer[2], 2);

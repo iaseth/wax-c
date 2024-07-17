@@ -31,7 +31,7 @@ int main (int argc, char const *argv[])
 	Byte header_buffer[WAX_FILE_HEADER_LENGTH];
 	fread(header_buffer, WAX_FILE_HEADER_LENGTH, 1, ptr);
 	WaxHeader header;
-	read_header_row(header_buffer, &header);
+	read_header_row_from_bytes(&header, header_buffer);
 	print_header_row(&header);
 
 	Byte *buffer = NULL;

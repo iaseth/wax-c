@@ -17,7 +17,7 @@ typedef struct WaxHeader
 } WaxHeader;
 
 
-int read_header_row (Byte const *buffer, WaxHeader *header);
+int read_header_row_from_bytes (WaxHeader *header, Byte const *buffer);
 int print_header_row (WaxHeader *header);
 
 
