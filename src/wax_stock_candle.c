@@ -1,5 +1,7 @@
 #include "wax_stock_candle.h"
 
+#include "wax_convert.h"
+
 
 
 int read_stock_candle_from_bytes(StockCandle *candle, Byte const *buffer)
@@ -15,8 +17,10 @@ int read_stock_candle_from_bytes(StockCandle *candle, Byte const *buffer)
 
 int print_stock_candle(StockCandle *candle, int n)
 {
-	printf("Row %3d: [ %d, %d, %d, %d, %d, %d ]\n", n, candle->timestamp,
-		candle->open, candle->high, candle->low, candle->close, candle->volume);
+	printf("Row %3d: [ %d, %.2f, %.2f, %.2f, %.2f, %.1fM ]\n", n, candle->timestamp,
+		x100(candle->open), x100(candle->high),
+		x100(candle->low), x100(candle->close),
+		xm(candle->volume));
 
 	return WAX_SUCCESS;
 }
