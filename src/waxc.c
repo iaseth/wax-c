@@ -43,6 +43,8 @@ int main (int argc, char const *argv[])
 		StockCandle candle;
 		read_stock_candle_from_bytes(&candle, buffer);
 		print_stock_candle(&candle, i+1);
+
+		if (i+1 >= number_of_rows_to_read) break;
 	}
 
 	fclose(ptr);
