@@ -1,27 +1,29 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdint.h>
 
 
 
 const int WAX_FILE_HEADER_LENGTH = 16;
 
 typedef unsigned char Byte;
+typedef uint32_t u32;
 
 typedef struct WaxHeader
 {
-	int version; // 2 bytes
-	int format; // 2 bytes
-	int header_lines_count; // 1 byte
-	int column_count; // 1 byte
-	int row_length; // 2 bytes
-	int row_count; // 4 bytes
-	int default_value; // 4 bytes
+	u32 version; // 2 bytes
+	u32 format; // 2 bytes
+	u32 header_lines_count; // 1 byte
+	u32 column_count; // 1 byte
+	u32 row_length; // 2 bytes
+	u32 row_count; // 4 bytes
+	u32 default_value; // 4 bytes
 } WaxHeader;
 
 
-int read_n_bytes_into_int (Byte const *buffer, int n)
+u32 read_n_bytes_into_int (Byte const *buffer, int n)
 {
-	int num = 0;
+	u32 num = 0;
 	for (int i = 0; i < n; ++i) {
 		num = (num * 256) + buffer[i];
 	}
@@ -86,18 +88,14 @@ int main (int argc, char const *argv[])
 	buffer = malloc(buffer_size);
 
 	for (int i = 0; i < header.row_count; ++i) {
-		printf("Row %3d: [ ", i+1);
-
 		fread(buffer, buffer_size, 1, ptr);
-		int t = read_n_bytes_into_int(&buffer[0], 4);
-		int o = read_n_bytes_into_int(&buffer[4], 4);
-		int h = read_n_bytes_into_int(&buffer[8], 4);
-		int l = read_n_bytes_into_int(&buffer[12], 4);
-		int c = read_n_bytes_into_int(&buffer[16], 4);
-		int v = read_n_bytes_into_int(&buffer[20], 4);
-		printf("%d, %d, %d, %d, %d, %d", t, o, h, l, c, v);
-
-		printf("]\n");
+		u32 t = read_n_bytes_into_int(&buffer[0], 4);
+		u32 o = read_n_bytes_into_int(&buffer[4], 4);
+		u32 h = read_n_bytes_into_int(&buffer[8], 4);
+		u32 l = read_n_bytes_into_int(&buffer[12], 4);
+		u32 c = read_n_bytes_into_int(&buffer[16], 4);
+		u32 v = read_n_bytes_into_int(&buffer[20], 4);
+		printf("Row %3d: [ %d, %d, %d, %d, %d, %d ]\n", i+1, t, o, h, l, c, v);
 	}
 
 	fclose(ptr);
