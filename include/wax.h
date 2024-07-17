@@ -1,6 +1,9 @@
 #ifndef WAX_H
 #define WAX_H
 
+#include <stdint.h>
+
+
 
 const int WAX_FILE_HEADER_LENGTH = 16;
 
