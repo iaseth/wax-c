@@ -41,12 +41,7 @@ int main (int argc, char const *argv[])
 	for (int i = 0; i < header.row_count; ++i) {
 		fread(buffer, buffer_size, 1, ptr);
 		StockCandle candle;
-		candle.timestamp = read_n_bytes_into_u32(&buffer[0], 4);
-		candle.open = read_n_bytes_into_u32(&buffer[4], 4);
-		candle.high = read_n_bytes_into_u32(&buffer[8], 4);
-		candle.low = read_n_bytes_into_u32(&buffer[12], 4);
-		candle.close = read_n_bytes_into_u32(&buffer[16], 4);
-		candle.volume = read_n_bytes_into_u32(&buffer[20], 4);
+		read_stock_candle_from_bytes(&candle, buffer);
 		print_stock_candle(&candle, i+1);
 	}
 
