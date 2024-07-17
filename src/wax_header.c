@@ -6,7 +6,7 @@
 
 
 
-void read_header_row (Byte const *buffer, WaxHeader *header)
+int read_header_row (Byte const *buffer, WaxHeader *header)
 {
 	header->version = read_n_bytes_into_u32(&buffer[0], 2);
 	header->format = read_n_bytes_into_u32(&buffer[2], 2);
@@ -15,10 +15,11 @@ void read_header_row (Byte const *buffer, WaxHeader *header)
 	header->row_length = read_n_bytes_into_u32(&buffer[6], 2);
 	header->row_count = read_n_bytes_into_u32(&buffer[8], 4);
 	header->default_value = read_n_bytes_into_u32(&buffer[12], 4);
+	return WAX_SUCCESS;
 }
 
 
-void print_header_row (WaxHeader *header)
+int print_header_row (WaxHeader *header)
 {
 	printf("\tWax Version: %d\n", header->version);
 	printf("\tWax Format: %d\n", header->format);
@@ -27,6 +28,7 @@ void print_header_row (WaxHeader *header)
 	printf("\tRow Length: %d\n", header->row_length);
 	printf("\tRow Count: %d\n", header->row_count);
 	printf("\tDefault Value: %d\n", header->default_value);
+	return WAX_SUCCESS;
 }
 
 
