@@ -3,12 +3,12 @@ default: waxc
 
 redo: clean default
 
-wax.o: src/wax.c
-	gcc -c src/wax.c src/wax_common.c src/wax_header.c -Iinclude
+wax.o: src/*.c
+	gcc -c src/*.c -Iinclude
 
 waxc: wax.o
-	gcc -o waxc wax_common.o wax_header.o wax.o
+	gcc -o waxc *.o
 
 clean:
-	rm -f wax.o
+	rm -f *.o
 	rm -f waxc
