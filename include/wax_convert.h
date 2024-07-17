@@ -4,6 +4,11 @@
 #include "wax_common.h"
 
 
+typedef struct TimeOfDay {
+	u32 hh, mm, ss;
+} TimeOfDay;
+
+TimeOfDay xtod (u32 timestamp);
 double x100 (u32 price);
 double xk (u32 price);
 double xm (u32 price);

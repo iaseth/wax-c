@@ -17,7 +17,8 @@ int read_stock_candle_from_bytes(StockCandle *candle, Byte const *buffer)
 
 int print_stock_candle(StockCandle *candle, int n)
 {
-	printf("Row %3d: [ %d, %.2f, %.2f, %.2f, %.2f, %.1fM ]\n", n, candle->timestamp,
+	TimeOfDay t = xtod(candle->timestamp);
+	printf("Row %3d: [ %02d:%02d, %.2f, %.2f, %.2f, %.2f, %.1fM ]\n", n, t.hh, t.mm,
 		x100(candle->open), x100(candle->high),
 		x100(candle->low), x100(candle->close),
 		xm(candle->volume));
