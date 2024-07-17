@@ -12,6 +12,8 @@ int read_stock_candle_from_bytes(StockCandle *candle, Byte const *buffer)
 	candle->low = read_n_bytes_into_u32(&buffer[12], 4);
 	candle->close = read_n_bytes_into_u32(&buffer[16], 4);
 	candle->volume = read_n_bytes_into_u32(&buffer[20], 4);
+
+	return WAX_SUCCESS;
 }
 
 
