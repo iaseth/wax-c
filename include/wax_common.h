@@ -4,11 +4,14 @@
 #include <stdint.h>
 
 
+#define WAX_FILE_HEADER_LENGTH 16
 
-const int WAX_FILE_HEADER_LENGTH = 16;
+
 
 typedef unsigned char Byte;
 typedef uint32_t u32;
+
+u32 read_n_bytes_into_u32 (Byte const *buffer, int n);
 
 
 
