@@ -1,6 +1,6 @@
-#include "wax_stock_candle.h"
+#include "wax/stock_candle.h"
 
-#include "wax_convert.h"
+#include "wax/convert.h"
 
 
 

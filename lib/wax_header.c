@@ -1,8 +1,8 @@
-#include "wax_header.h"
+#include "wax/header.h"
 
 #include <stdio.h>
 
-#include "wax_common.h"
+#include "wax/common.h"
 
 
 

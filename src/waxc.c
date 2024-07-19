@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "wax_common.h"
-#include "wax_header.h"
-#include "wax_stock_candle.h"
+#include "wax/common.h"
+#include "wax/header.h"
+#include "wax/stock_candle.h"
 
 
 
