@@ -7,11 +7,11 @@
 int read_stock_candle_from_bytes(StockCandle *candle, Byte const *buffer)
 {
 	candle->timestamp = read_n_bytes_into_u32(&buffer[0], 4);
-	candle->open = read_n_bytes_into_u32(&buffer[4], 4);
-	candle->high = read_n_bytes_into_u32(&buffer[8], 4);
-	candle->low = read_n_bytes_into_u32(&buffer[12], 4);
-	candle->close = read_n_bytes_into_u32(&buffer[16], 4);
-	candle->volume = read_n_bytes_into_u32(&buffer[20], 4);
+	candle->open = read_n_bytes_into_u32(&buffer[4], 3);
+	candle->high = read_n_bytes_into_u32(&buffer[7], 3);
+	candle->low = read_n_bytes_into_u32(&buffer[10], 3);
+	candle->close = read_n_bytes_into_u32(&buffer[13], 3);
+	candle->volume = read_n_bytes_into_u32(&buffer[16], 4);
 
 	return WAX_SUCCESS;
 }

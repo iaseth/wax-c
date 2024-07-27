@@ -33,7 +33,7 @@ int main (int argc, char const *argv[])
 	print_header_row(&header);
 
 	Byte *buffer = NULL;
-	int buffer_size = 24;
+	int buffer_size = header.row_length;
 	buffer = malloc(buffer_size);
 
 	for (int i = 0; i < header.row_count; ++i) {
