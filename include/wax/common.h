@@ -8,6 +8,7 @@
 #define WAX_SUCCESS 0
 #define WAX_ERROR 1
 #define WAX_FILE_HEADER_LENGTH 16
+#define WAX_MAX_COLUMNS_COUNT 16
 
 
 
